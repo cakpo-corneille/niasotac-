@@ -1,13 +1,14 @@
 from rest_framework import viewsets, filters, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser, AllowAny
 from django.db.models import Count, Q
-from .models import Category, Product
+from .models import Category, Product, SiteSettings
 from .serializers import (
     CategorySerializer,
     ProductSerializer,
-    ProductListSerializer
+    ProductListSerializer,
+    SiteSettingsSerializer
 )
 
 
@@ -52,7 +53,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
         products = Product.objects.filter(
             Q(category=category) | Q(subcategory=category)
         )
-        serializer = ProductListSerializer(products, many=True)
+        serializer = ProductListSerializer(products, many=True, context={'request': request})
         return Response(serializer.data)
 
 
@@ -107,14 +108,14 @@ class ProductViewSet(viewsets.ModelViewSet):
     def featured(self, request):
         """Retourne les produits vedettes"""
         featured_products = self.get_queryset().filter(featured=True)[:8]
-        serializer = ProductListSerializer(featured_products, many=True)
+        serializer = ProductListSerializer(featured_products, many=True, context={'request': request})
         return Response(serializer.data)
 
     @action(detail=False, methods=['get'])
     def recent(self, request):
         """Retourne les produits récents"""
         recent_products = self.get_queryset().order_by('-created_at')[:10]
-        serializer = ProductListSerializer(recent_products, many=True)
+        serializer = ProductListSerializer(recent_products, many=True, context={'request': request})
         return Response(serializer.data)
 
     @action(detail=False, methods=['get'])
@@ -138,3 +139,15 @@ class ProductViewSet(viewsets.ModelViewSet):
             )
         }
         return Response(stats)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def site_settings_view(request):
+    """
+    Vue pour récupérer les paramètres du site
+    GET /api/settings/ - Retourne les paramètres du site (public)
+    """
+    settings = SiteSettings.load()
+    serializer = SiteSettingsSerializer(settings, context={'request': request})
+    return Response(serializer.data)

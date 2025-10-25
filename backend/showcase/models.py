@@ -125,8 +125,9 @@ class Product(models.Model):
     @property
     def whatsapp_link(self):
         """Génère un lien WhatsApp avec message pré-rempli"""
-        phone_number = "237XXXXXXXXX"
-        message = f"""Bonjour NIASOTAC TECHNOLOGIE,
+        settings = SiteSettings.load()
+        phone_number = settings.whatsapp_number
+        message = f"""Bonjour {settings.company_name},
 
 Je suis intéressé(e) par le produit suivant:
 
@@ -143,3 +144,64 @@ Merci de me contacter pour plus d'informations."""
     def display_price(self):
         """Retourne le prix formaté"""
         return f"{self.price:,.0f} FCFA"
+
+
+class SiteSettings(models.Model):
+    """Paramètres globaux du site (Singleton)"""
+    whatsapp_number = models.CharField(
+        max_length=20,
+        default="237XXXXXXXXX",
+        verbose_name="Numéro WhatsApp",
+        help_text="Format: 237XXXXXXXXX (sans le +)"
+    )
+    contact_email = models.EmailField(
+        default="contact@niasotac.com",
+        verbose_name="Email de contact"
+    )
+    contact_phone = models.CharField(
+        max_length=20,
+        default="+229 00 00 00 00",
+        verbose_name="Téléphone de contact"
+    )
+    contact_address = models.CharField(
+        max_length=200,
+        default="Cotonou, Bénin",
+        verbose_name="Adresse"
+    )
+    company_name = models.CharField(
+        max_length=100,
+        default="NIASOTAC TECHNOLOGIE",
+        verbose_name="Nom de l'entreprise"
+    )
+    company_description = models.TextField(
+        default="Votre revendeur tech de confiance au Bénin. Produits de qualité à prix compétitifs.",
+        verbose_name="Description de l'entreprise"
+    )
+    updated_at = models.DateTimeField(auto_now=True)
+    updated_by = models.ForeignKey(
+        'auth.User',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Modifié par"
+    )
+
+    class Meta:
+        verbose_name = "Paramètres du site"
+        verbose_name_plural = "Paramètres du site"
+
+    def __str__(self):
+        return "Paramètres du site"
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass
+
+    @classmethod
+    def load(cls):
+        """Charge ou crée les paramètres du site"""
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj

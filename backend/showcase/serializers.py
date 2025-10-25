@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Product
+from .models import Category, Product, SiteSettings
 
 
 class SubcategorySerializer(serializers.ModelSerializer):
@@ -33,6 +33,7 @@ class ProductSerializer(serializers.ModelSerializer):
     subcategory_name = serializers.CharField(source='subcategory.name', read_only=True)
     whatsapp_link = serializers.ReadOnlyField()
     display_price = serializers.ReadOnlyField()
+    image = serializers.SerializerMethodField()
     
     class Meta:
         model = Product
@@ -43,6 +44,14 @@ class ProductSerializer(serializers.ModelSerializer):
             'created_at', 'updated_at'
         ]
         read_only_fields = ['slug', 'created_at', 'updated_at']
+    
+    def get_image(self, obj):
+        """Retourne l'URL complète de l'image"""
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+        return None
 
     def validate_image(self, value):
         """Valider la taille et le type de l'image"""
@@ -64,6 +73,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     subcategory_name = serializers.CharField(source='subcategory.name', read_only=True)
     display_price = serializers.ReadOnlyField()
+    image = serializers.SerializerMethodField()
     
     class Meta:
         model = Product
@@ -72,3 +82,24 @@ class ProductListSerializer(serializers.ModelSerializer):
             'image', 'category_name', 'subcategory_name', 'in_stock',
             'featured', 'created_at'
         ]
+    
+    def get_image(self, obj):
+        """Retourne l'URL complète de l'image"""
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+        return None
+
+
+class SiteSettingsSerializer(serializers.ModelSerializer):
+    """Serializer pour les paramètres du site"""
+    
+    class Meta:
+        model = SiteSettings
+        fields = [
+            'whatsapp_number', 'contact_email', 'contact_phone',
+            'contact_address', 'company_name', 'company_description',
+            'updated_at'
+        ]
+        read_only_fields = ['updated_at']

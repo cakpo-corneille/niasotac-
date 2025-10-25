@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.db.models import Count
-from .models import Category, Product
+from .models import Category, Product, SiteSettings
 
 
 @admin.register(Category)
@@ -104,6 +104,34 @@ class ProductAdmin(admin.ModelAdmin):
         )
     price_display.short_description = "Prix"
     price_display.admin_order_field = 'price'
+
+
+@admin.register(SiteSettings)
+class SiteSettingsAdmin(admin.ModelAdmin):
+    """Administration personnalisée pour les paramètres du site"""
+    fieldsets = (
+        ('Informations de contact', {
+            'fields': ('whatsapp_number', 'contact_phone', 'contact_email', 'contact_address')
+        }),
+        ('Informations de l\'entreprise', {
+            'fields': ('company_name', 'company_description')
+        }),
+        ('Métadonnées', {
+            'fields': ('updated_at', 'updated_by'),
+            'classes': ('collapse',)
+        }),
+    )
+    readonly_fields = ['updated_at', 'updated_by']
+
+    def has_add_permission(self, request):
+        return not SiteSettings.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def save_model(self, request, obj, form, change):
+        obj.updated_by = request.user
+        super().save_model(request, obj, form, change)
 
 
 admin.site.site_header = "NIASOTAC TECHNOLOGIE - Administration"

@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { ShoppingBag, MapPin, Phone, Mail } from 'lucide-react';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 export const Footer = () => {
+  const { data: settings } = useSiteSettings();
+  
   return (
     <footer className="bg-card border-t border-border mt-auto">
       <div className="container mx-auto px-4 py-12">
@@ -15,17 +18,17 @@ export const Footer = () => {
               </span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Your trusted tech reseller in Benin. Quality products at competitive prices.
+              {settings?.company_description || 'Votre revendeur tech de confiance au Bénin. Produits de qualité à prix compétitifs.'}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
+            <h3 className="font-semibold mb-4">Liens Rapides</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/products" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Products
+                  Produits
                 </Link>
               </li>
               <li>
@@ -35,7 +38,7 @@ export const Footer = () => {
               </li>
               <li>
                 <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Contact Us
+                  Contactez-nous
                 </Link>
               </li>
             </ul>
@@ -43,26 +46,26 @@ export const Footer = () => {
 
           {/* Categories */}
           <div>
-            <h3 className="font-semibold mb-4">Categories</h3>
+            <h3 className="font-semibold mb-4">Catégories</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/products?category=computers" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Computers
+                  Ordinateurs
                 </Link>
               </li>
               <li>
                 <Link to="/products?category=components" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Components
+                  Composants
                 </Link>
               </li>
               <li>
                 <Link to="/products?category=printers" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Printers
+                  Imprimantes
                 </Link>
               </li>
               <li>
                 <Link to="/products?category=accessories" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Accessories
+                  Accessoires
                 </Link>
               </li>
             </ul>
@@ -74,18 +77,18 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>Cotonou, Benin</span>
+                <span>{settings?.contact_address || 'Cotonou, Bénin'}</span>
               </li>
               <li className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 flex-shrink-0" />
-                <a href="tel:+22900000000" className="hover:text-primary transition-colors">
-                  +229 00 00 00 00
+                <a href={`tel:${settings?.contact_phone || '+22900000000'}`} className="hover:text-primary transition-colors">
+                  {settings?.contact_phone || '+229 00 00 00 00'}
                 </a>
               </li>
               <li className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 flex-shrink-0" />
-                <a href="mailto:contact@niasotac.com" className="hover:text-primary transition-colors">
-                  contact@niasotac.com
+                <a href={`mailto:${settings?.contact_email || 'contact@niasotac.com'}`} className="hover:text-primary transition-colors">
+                  {settings?.contact_email || 'contact@niasotac.com'}
                 </a>
               </li>
             </ul>
@@ -93,7 +96,7 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} NIASOTAC TECHNOLOGIE. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} NIASOTAC TECHNOLOGIE. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

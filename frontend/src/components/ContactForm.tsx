@@ -17,10 +17,10 @@ import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
-  name: z.string().trim().min(2, 'Name must be at least 2 characters').max(100, 'Name too long'),
-  email: z.string().trim().email('Invalid email address').max(255, 'Email too long'),
-  phone: z.string().trim().min(8, 'Phone number must be at least 8 characters').max(20, 'Phone number too long'),
-  message: z.string().trim().min(10, 'Message must be at least 10 characters').max(1000, 'Message too long'),
+  name: z.string().trim().min(2, 'Le nom doit contenir au moins 2 caractères').max(100, 'Nom trop long'),
+  email: z.string().trim().email('Adresse email invalide').max(255, 'Email trop long'),
+  phone: z.string().trim().min(8, 'Le numéro de téléphone doit contenir au moins 8 caractères').max(20, 'Numéro trop long'),
+  message: z.string().trim().min(10, 'Le message doit contenir au moins 10 caractères').max(1000, 'Message trop long'),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -42,20 +42,16 @@ export const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // In production, this would send to your Django API
-      // await api.post('/contact', data);
-      
-      toast.success('Message sent successfully!', {
-        description: 'We will get back to you soon via WhatsApp or email.',
+      toast.success('Message envoyé avec succès !', {
+        description: 'Nous vous répondrons bientôt via WhatsApp ou email.',
       });
       
       form.reset();
     } catch (error) {
-      toast.error('Failed to send message', {
-        description: 'Please try again or contact us directly via WhatsApp.',
+      toast.error('Échec de l\'envoi du message', {
+        description: 'Veuillez réessayer ou nous contacter directement via WhatsApp.',
       });
     } finally {
       setIsSubmitting(false);
@@ -70,9 +66,9 @@ export const ContactForm = () => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Full Name</FormLabel>
+              <FormLabel>Nom Complet</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} />
+                <Input placeholder="Jean Dupont" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -86,7 +82,7 @@ export const ContactForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="john@example.com" {...field} />
+                <Input type="email" placeholder="jean@exemple.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -98,7 +94,7 @@ export const ContactForm = () => {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone Number</FormLabel>
+              <FormLabel>Numéro de Téléphone</FormLabel>
               <FormControl>
                 <Input placeholder="+229 00 00 00 00" {...field} />
               </FormControl>
@@ -115,7 +111,7 @@ export const ContactForm = () => {
               <FormLabel>Message</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us about your requirements..."
+                  placeholder="Parlez-nous de vos besoins..."
                   className="min-h-[120px]"
                   {...field}
                 />
@@ -129,10 +125,10 @@ export const ContactForm = () => {
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Sending...
+              Envoi en cours...
             </>
           ) : (
-            'Send Message'
+            'Envoyer le Message'
           )}
         </Button>
       </form>

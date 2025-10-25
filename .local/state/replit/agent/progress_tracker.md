@@ -16,10 +16,20 @@
 - [x] API Backend Django fonctionnelle (tous les endpoints retournent 200)
 - [x] Pages Services et Contact traduites et stylisées
 
+### ✅ Nouvelles fonctionnalités ajoutées
+- [x] Modèle SiteSettings créé pour gérer les informations de contact en base de données
+- [x] API `/api/settings/` pour récupérer les paramètres du site
+- [x] Hook React `useSiteSettings` pour utiliser les paramètres dans le frontend
+- [x] WhatsAppButton et Footer utilisent maintenant les paramètres dynamiques
+- [x] Toutes les pages traduites en français (NotFound, Footer, ContactForm)
+- [x] Serializers configurés pour retourner les URLs complètes des images
+- [x] Superutilisateur créé (admin/admin) pour accéder à l'admin Django
+- [x] Paramètres du site initialisés avec les valeurs par défaut
+
 ### ⚠️ Prochaines étapes (facultatif)
-- [ ] Intégration IA pour recommandations (OpenAI blueprint identifié, pas encore implémenté)
+- [ ] Ajouter des images réelles aux produits via l'admin Django
+- [ ] Intégration IA pour recommandations
 - [ ] Messages WhatsApp avec images de produits
-- [ ] Documentation française dans le code
 
 ### 📊 État des Workflows
 - Django API Backend: ✅ RUNNING (port 8000)
