@@ -129,11 +129,14 @@ cd frontend && npm run dev
 
 ## Configuration importante
 
-### WhatsApp
-⚠️ **À CONFIGURER**: Numéro WhatsApp dans `showcase/models.py`
-```python
-phone_number = "237XXXXXXXXX"  # Ligne 127
-```
+### Paramètres du site (WhatsApp, Email, etc.)
+✅ **Configurable via Django Admin**: Tous les paramètres de contact sont maintenant modifiables via l'interface admin
+- Accéder à http://localhost:8000/admin/
+- Se connecter avec admin/admin
+- Aller dans "Paramètres du site" > "Site settings"
+- Modifier: numéro WhatsApp, email, téléphone, adresse, nom et description de l'entreprise
+
+Les changements sont automatiquement reflétés sur le frontend (mise en cache 30 minutes).
 
 ### Variables d'environnement
 Automatiquement configurées par Replit:
@@ -222,6 +225,15 @@ const { data } = useCategory(slug);
 - **Région**: Afrique/Douala
 
 ## Changements récents
+- 25 Oct 2025: Gestion dynamique des paramètres du site
+  - Modèle SiteSettings pour stocker les informations de contact en base de données
+  - API `/api/settings/` pour récupérer les paramètres du site
+  - Hook React `useSiteSettings` pour utiliser les paramètres dans le frontend
+  - WhatsAppButton et Footer utilisent maintenant les paramètres dynamiques
+  - Traduction complète en français de toutes les pages
+  - Correction des URLs d'images (context de requête dans tous les serializers)
+  - Superutilisateur créé (admin/admin)
+  
 - 20 Oct 2025: Intégration complète frontend + backend
   - Backend Django REST complet (port 8000)
   - Frontend React/Vite (port 5000)
