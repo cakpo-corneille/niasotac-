@@ -27,25 +27,25 @@ args = "Frontend React"
 name = "Django API Backend"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python manage.py runserver 0.0.0.0:8000"
-waitForPort = 8000
-
 [workflows.workflow.metadata]
 outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend && python manage.py runserver 0.0.0.0:8000"
+waitForPort = 8000
 
 [[workflows.workflow]]
 name = "Frontend React"
 author = "agent"
 
+[workflows.workflow.metadata]
+outputType = "webview"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
 waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"
 
 [[ports]]
 localPort = 5000
