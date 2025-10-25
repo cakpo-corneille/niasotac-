@@ -38,11 +38,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 Vedette
               </div>
             )}
-            {!product.in_stock && (
-              <div className="absolute top-3 left-3 bg-destructive text-destructive-foreground px-3 py-1 rounded-full text-xs font-semibold">
-                Rupture de stock
-              </div>
-            )}
           </div>
         </Link>
       </CardHeader>
@@ -80,9 +75,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           rel="noopener noreferrer"
           className="flex-1"
         >
-          <Button className="w-full" disabled={!product.in_stock}>
+          <Button className="w-full bg-[#25D366] hover:bg-[#20BD5A] text-white">
             <MessageCircle className="mr-2 h-4 w-4" />
-            {product.in_stock ? 'Commander' : 'Indisponible'}
+            Commander
           </Button>
         </a>
       </CardFooter>

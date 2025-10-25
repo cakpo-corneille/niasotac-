@@ -1,74 +1,78 @@
+/**
+ * Page Services - NIASOTAC TECHNOLOGIE
+ * Décrit les services offerts par NIASOTAC
+ */
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Camera, TrendingUp, MessageSquare, ShoppingCart, CheckCircle2, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Services = () => {
-  const whatsappNumber = '+22900000000';
-  const whatsappMessage = encodeURIComponent('Hello! I would like to know more about your services.');
+  const whatsappNumber = '+237XXXXXXXXX';
+  const whatsappMessage = encodeURIComponent('Bonjour ! J\'aimerais en savoir plus sur vos services.');
 
   const services = [
     {
       icon: Camera,
-      title: 'Product Photography',
-      description: 'We visit partner electronics stores across Benin and take high-quality photos of their products, ensuring every detail is captured professionally.',
+      title: 'Photographie de Produits',
+      description: 'Nous visitons les magasins d\'électronique partenaires à travers le Bénin et prenons des photos de haute qualité de leurs produits, en capturant chaque détail de manière professionnelle.',
       benefits: [
-        'Professional product images',
-        'Multiple angles and views',
-        'High-resolution photos',
-        'Quick turnaround time',
+        'Images professionnelles de produits',
+        'Angles et vues multiples',
+        'Photos haute résolution',
+        'Délai rapide',
       ],
     },
     {
       icon: TrendingUp,
-      title: 'Online Promotion',
-      description: 'We promote products through our website and social media channels, reaching customers who are actively looking for tech products.',
+      title: 'Promotion en Ligne',
+      description: 'Nous promouvons les produits via notre site web et nos réseaux sociaux, atteignant les clients qui recherchent activement des produits tech.',
       benefits: [
-        'Wide online reach',
-        'Targeted marketing',
-        'Social media presence',
-        'SEO-optimized listings',
+        'Large portée en ligne',
+        'Marketing ciblé',
+        'Présence sur les réseaux sociaux',
+        'Référencement optimisé',
       ],
     },
     {
       icon: MessageSquare,
-      title: 'Price Negotiation',
-      description: 'We work with our partner stores to negotiate the best possible prices for our customers, ensuring you get great value for your money.',
+      title: 'Négociation des Prix',
+      description: 'Nous travaillons avec nos magasins partenaires pour négocier les meilleurs prix possibles pour nos clients, vous garantissant un excellent rapport qualité-prix.',
       benefits: [
-        'Competitive pricing',
-        'Bulk discounts available',
-        'Direct store relationships',
-        'Transparent pricing',
+        'Prix compétitifs',
+        'Remises en gros disponibles',
+        'Relations directes avec les magasins',
+        'Tarification transparente',
       ],
     },
     {
       icon: ShoppingCart,
-      title: 'Direct Sales',
-      description: 'We handle the entire sales process from inquiry to delivery, making it easy and convenient for you to get the tech products you need.',
+      title: 'Vente Directe',
+      description: 'Nous gérons l\'ensemble du processus de vente, de la demande à la livraison, vous facilitant l\'obtention des produits tech dont vous avez besoin.',
       benefits: [
-        'Simple ordering process',
-        'Fast delivery',
-        'Secure transactions',
-        '24/7 WhatsApp support',
+        'Processus de commande simple',
+        'Livraison rapide',
+        'Transactions sécurisées',
+        'Support WhatsApp 24/7',
       ],
     },
   ];
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
+      {/* Section Hero */}
       <section className="bg-gradient-to-b from-primary/5 to-background py-16 md:py-24 border-b">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center space-y-6">
-            <h1 className="text-4xl md:text-5xl font-bold">Our Services</h1>
+            <h1 className="text-4xl md:text-5xl font-bold">Nos Services</h1>
             <p className="text-xl text-muted-foreground">
-              We bridge the gap between tech stores and customers, making quality products 
-              accessible and affordable across Benin
+              Nous comblons le fossé entre les magasins tech et les clients, rendant les produits 
+              de qualité accessibles et abordables à travers le Bénin
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link to="/products">
                 <Button size="lg">
-                  Browse Products
+                  Parcourir les Produits
                 </Button>
               </Link>
               <a
@@ -76,9 +80,9 @@ const Services = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" variant="outline">
+                <Button size="lg" variant="outline" className="bg-[#25D366] hover:bg-[#20BD5A] text-white border-[#25D366]">
                   <MessageCircle className="mr-2 h-4 w-4" />
-                  Contact Us
+                  Contactez-nous
                 </Button>
               </a>
             </div>
@@ -86,22 +90,22 @@ const Services = () => {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* Comment Nous Fonctionnons */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How We Work</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Notre Processus</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our streamlined process ensures you get the best products at the best prices
+              Notre processus simplifié vous garantit les meilleurs produits aux meilleurs prix
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {[
-              { step: '1', title: 'Visit Stores', desc: 'We visit partner electronics stores' },
-              { step: '2', title: 'Document Products', desc: 'Take photos and gather product details' },
-              { step: '3', title: 'List Online', desc: 'Publish products on our website' },
-              { step: '4', title: 'Connect & Sell', desc: 'Connect customers with best deals' },
+              { step: '1', title: 'Visite des Magasins', desc: 'Nous visitons les magasins d\'électronique partenaires' },
+              { step: '2', title: 'Documentation Produits', desc: 'Photos et collecte des détails produits' },
+              { step: '3', title: 'Mise en Ligne', desc: 'Publication des produits sur notre site' },
+              { step: '4', title: 'Connexion & Vente', desc: 'Connexion des clients avec les meilleures offres' },
             ].map((item, index) => (
               <div key={index} className="relative">
                 <div className="text-center space-y-4">
@@ -120,7 +124,7 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services Detail */}
+      {/* Détails des Services */}
       <section className="py-16 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -151,34 +155,34 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* Pourquoi Choisir NIASOTAC */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose NIASOTAC?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Pourquoi Choisir NIASOTAC ?</h2>
               <p className="text-muted-foreground">
-                We're more than just a reseller - we're your trusted tech partner
+                Nous sommes bien plus qu'un simple revendeur - nous sommes votre partenaire tech de confiance
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
-                  title: 'Extensive Network',
-                  desc: 'We partner with 50+ electronics stores across Benin, giving you access to the widest selection of products.',
+                  title: 'Réseau Étendu',
+                  desc: 'Nous collaborons avec plus de 50 magasins d\'électronique à travers le Bénin, vous offrant la plus large sélection de produits.',
                 },
                 {
-                  title: 'Competitive Prices',
-                  desc: 'Our strong relationships with stores allow us to negotiate better prices for you.',
+                  title: 'Prix Compétitifs',
+                  desc: 'Nos relations solides avec les magasins nous permettent de négocier de meilleurs prix pour vous.',
                 },
                 {
-                  title: 'Quality Assurance',
-                  desc: 'Every product is verified before being listed, ensuring you get genuine, quality items.',
+                  title: 'Garantie de Qualité',
+                  desc: 'Chaque produit est vérifié avant d\'être répertorié, vous assurant des articles authentiques et de qualité.',
                 },
                 {
-                  title: 'Always Available',
-                  desc: '24/7 support via WhatsApp means we\'re here whenever you need assistance.',
+                  title: 'Toujours Disponible',
+                  desc: 'Support 24/7 via WhatsApp, nous sommes là quand vous avez besoin d\'assistance.',
                 },
               ].map((item, index) => (
                 <div key={index} className="p-6 rounded-lg border bg-card space-y-2">
@@ -191,18 +195,18 @@ const Services = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Section CTA */}
       <section className="py-16 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold">Ready to Get Started?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">Prêt à Commencer ?</h2>
             <p className="text-lg opacity-90">
-              Browse our products or contact us directly to find exactly what you need
+              Parcourez nos produits ou contactez-nous directement pour trouver exactement ce dont vous avez besoin
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link to="/products">
                 <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                  View Products
+                  Voir les Produits
                 </Button>
               </Link>
               <a
@@ -212,7 +216,7 @@ const Services = () => {
               >
                 <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary">
                   <MessageCircle className="mr-2 h-4 w-4" />
-                  WhatsApp Us
+                  Écrivez-nous
                 </Button>
               </a>
             </div>

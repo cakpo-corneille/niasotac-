@@ -10,8 +10,8 @@ export const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/products', label: 'Products' },
+    { path: '/', label: 'Accueil' },
+    { path: '/products', label: 'Produits' },
     { path: '/services', label: 'Services' },
     { path: '/contact', label: 'Contact' },
   ];
@@ -22,7 +22,9 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <ShoppingBag className="h-8 w-8 text-primary group-hover:scale-110 transition-transform" />
+            <div className="h-10 w-10 bg-primary text-primary-foreground rounded-lg flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">
+              NT
+            </div>
             <span className="text-xl font-bold text-foreground">
               <span className="text-primary">NIASOTAC</span>
             </span>

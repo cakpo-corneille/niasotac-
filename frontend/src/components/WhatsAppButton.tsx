@@ -2,8 +2,8 @@ import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const WhatsAppButton = () => {
-  const whatsappNumber = '+22900000000';
-  const whatsappMessage = encodeURIComponent('Hello! I am interested in your tech products.');
+  const whatsappNumber = '+237XXXXXXXXX';
+  const whatsappMessage = encodeURIComponent('Bonjour ! Je suis intéressé par vos produits tech.');
 
   return (
     <a
@@ -14,7 +14,7 @@ export const WhatsAppButton = () => {
     >
       <Button
         size="lg"
-        className="rounded-full shadow-lg hover:scale-110 transition-transform group"
+        className="rounded-full shadow-lg hover:scale-110 transition-transform group bg-[#25D366] hover:bg-[#20BD5A] text-white"
       >
         <MessageCircle className="h-5 w-5 group-hover:animate-pulse" />
         <span className="ml-2">WhatsApp</span>
